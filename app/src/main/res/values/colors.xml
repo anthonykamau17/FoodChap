@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="fc_background">#FFFFFF</color>
+    <color name="fc_surface">#E9E9E9</color>
+    <color name="fc_accent">#6BAE4C</color>
+    <color name="fc_nav_button">#242627</color>
+    <color name="fc_rating_gold">#ECB369</color>
+
+    <color name="fc_text_primary">#1A1A1A</color>
+    <color name="fc_text_secondary">#6B6B6B</color>
+    <color name="fc_on_accent">#FFFFFF</color>
+    <color name="fc_on_nav_button">#FFFFFF</color>
+
+    <color name="fc_divider">#DDDDDD</color>
+    <color name="fc_peach_accent">#F8AB70</color>
+</resources>

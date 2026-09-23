@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="Theme.FoodChap" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/fc_accent</item>
+        <item name="colorOnPrimary">@color/fc_on_accent</item>
+        <item name="colorSecondary">@color/fc_nav_button</item>
+        <item name="colorOnSecondary">@color/fc_on_nav_button</item>
+
+        <item name="android:colorBackground">@color/fc_background</item>
+        <item name="colorSurface">@color/fc_surface</item>
+        <item name="colorOnSurface">@color/fc_text_primary</item>
+        <item name="colorOnBackground">@color/fc_text_primary</item>
+
+        <item name="android:statusBarColor" tools:targetApi="l">@color/fc_background</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+    </style>
+</resources>
