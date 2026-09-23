@@ -548,7 +548,7 @@ object SeedData {
                 difficulty = Difficulty.EASY, rating = 4.5f, totalCostKes = 250, servings = 3, imageResName = "vegetable_stir_fry",
                 description = "Crisp vegetables tossed quickly in soy sauce — light and colourful."),
             Recipe(name = "Chickpea Salad", mealType = MealType.LUNCH, prepTimeMinutes = 15, cookTimeMinutes = 0,
-                difficulty = Difficulty.EASY, rating = 4.3f, totalCostKes = 200, servings = 3, imageResName = "chickpen_salad",
+                difficulty = Difficulty.EASY, rating = 4.3f, totalCostKes = 200, servings = 3, imageResName = "chickpea_salad",
                 description = "Fresh, protein-packed salad with chickpeas, cucumber, and a lime dressing."),
             Recipe(name = "Lentil Soup", mealType = MealType.LUNCH, prepTimeMinutes = 10, cookTimeMinutes = 30,
                 difficulty = Difficulty.EASY, rating = 4.6f, totalCostKes = 180, servings = 4, imageResName = "lentil_soup",
@@ -1836,49 +1836,93 @@ object SeedData {
 
         db.recipeDao().insertRecipeSteps(steps)
 
+        // ---- 5. Recipe pairings — "goes well with" suggestions, generated from food-role groups ----
+        val pairingNamePairs = mutableSetOf<Pair<String, String>>()
 
-        // ---- 5. Recipe pairings — "goes well with" suggestions ----
-        fun pair(a: String, b: String): List<com.anthonykamau.foodchap.data.local.entity.RecipePairing> {
-            val idA = recipeIdOf.getValue(a)
-            val idB = recipeIdOf.getValue(b)
-            return listOf(
-                com.anthonykamau.foodchap.data.local.entity.RecipePairing(recipeId = idA, pairedRecipeId = idB),
-                com.anthonykamau.foodchap.data.local.entity.RecipePairing(recipeId = idB, pairedRecipeId = idA)
-            )
+        fun addPair(a: String, b: String) {
+            if (a == b) return
+            pairingNamePairs.add(if (a < b) a to b else b to a)
         }
 
-        val pairings = mutableListOf<com.anthonykamau.foodchap.data.local.entity.RecipePairing>()
-        pairings += pair("Chapati", "Ndengu")
-        pairings += pair("Chapati", "Maharagwe ya Nazi")
-        pairings += pair("Ugali na Sukuma Wiki", "Nyama Choma")
-        pairings += pair("Ugali na Sukuma Wiki", "Managu na Nyama")
-        pairings += pair("Mukimo", "Managu na Nyama")
-        pairings += pair("Mukimo", "Kuku Kienyeji Fry")
-        pairings += pair("Pilau", "Kachumbari")
-        pairings += pair("Biryani", "Kachumbari")
-        pairings += pair("Wali wa Nazi", "Samaki wa Kukaanga")
-        pairings += pair("Wali wa Nazi", "Mchuzi wa Samaki")
-        pairings += pair("Githeri", "Kachumbari ya Parachichi")
-        pairings += pair("Irio", "Nyama Choma")
-        pairings += pair("Kuku Choma", "Kachumbari")
-        pairings += pair("Mishkaki", "Kachumbari")
-        pairings += pair("Chapati Mayai", "Chai ya Tangawizi")
-        pairings += pair("Mandazi", "Kenyan Chai")
-        pairings += pair("Mahamri", "Kenyan Chai")
-        pairings += pair("Spaghetti Bolognese", "Caesar Salad")
-        pairings += pair("Mac and Cheese", "Coleslaw")
-        pairings += pair("Roast Chicken", "Sweet Potato Mash")
-        pairings += pair("Roast Chicken", "Vegetable Stir Fry")
-        pairings += pair("Beef Tacos", "Chickpea Salad")
-        pairings += pair("Shrimp Pasta", "Caesar Salad")
-        pairings += pair("Vegetable Curry", "Wali wa Kukaanga")
-        pairings += pair("Chicken Curry", "Wali wa Kukaanga")
-        pairings += pair("Grilled Cheese Sandwich", "Tomato Soup")
-        pairings += pair("Hot Dog", "Potato Wedges")
-        pairings += pair("Banana Pancakes", "Mango Smoothie")
-        pairings += pair("Classic Pancakes", "Banana Smoothie")
+        fun addAllPairs(groupA: List<String>, groupB: List<String>) {
+            for (a in groupA) for (b in groupB) addPair(a, b)
+        }
 
+        val starches = listOf(
+            "Ugali na Sukuma Wiki", "Chapati", "Wali wa Nazi", "Irio", "Mukimo",
+            "Ugali wa Mtama", "Ugali wa Muhogo", "Wali wa Kukaanga", "Biryani",
+            "Pilau", "Pilau ya Samaki", "Ugali na Mayai"
+        )
+
+        val proteinMains = listOf(
+            "Nyama Choma", "Managu na Nyama", "Omena kwa Nazi", "Kuku wa Kienyeji",
+            "Mchuzi wa Samaki", "Mchuzi wa Nyama", "Sukuma Wiki na Nyama", "Kuku Kienyeji Fry",
+            "Wet Fry", "Kunde na Nyama", "Matumbo", "Mchicha na Nyama", "Supu ya Kuku",
+            "Kuku Choma", "Mishkaki", "Kuku wa Nazi", "Samaki wa Kukaanga", "Mutura",
+            "Kimanga", "Matoke", "Chicken Curry", "Vegetable Curry", "Beef Stir Fry",
+            "Roast Chicken", "Pork Chops with Herbs"
+        )
+
+        val sides = listOf(
+            "Kachumbari", "Kachumbari ya Parachichi", "Coleslaw", "Beetroot Salad",
+            "Ndizi Kaanga", "Ndizi na Nazi", "Sukuma na Maharagwe", "Maharagwe ya Nazi",
+            "Terere", "Kunde", "Githeri", "Muthokoi", "Mahindi na Njugu", "Ndengu"
+        )
+
+        // This is the "ugali pairs with most proteins" rule — every starch
+        // cross-linked with every protein and every side.
+        addAllPairs(starches, proteinMains)
+        addAllPairs(starches, sides)
+        addAllPairs(proteinMains, sides)
+
+        val breakfastSnacks = listOf(
+            "Mandazi", "Mahamri", "Kaimati", "Chapati Mayai", "Mkate wa Sinia",
+            "Bhajia", "Samosa", "Kachori", "Mahindi Choma", "Karanga", "Mabuyu"
+        )
+        val breakfastDrinks = listOf(
+            "Kenyan Chai", "Chai ya Tangawizi", "Maziwa Lala", "Mursik", "Uji", "Uji wa Mtama"
+        )
+        addAllPairs(breakfastSnacks, breakfastDrinks)
+
+        val globalBreakfast = listOf(
+            "Banana Pancakes", "Classic Pancakes", "Cheese Omelette", "French Toast",
+            "Greek-Style Yogurt Bowl", "Almond Granola", "Banana Bread"
+        )
+        val globalDrinks = listOf("Banana Smoothie", "Mango Smoothie")
+        addAllPairs(globalBreakfast, globalDrinks)
+
+        val globalMains = listOf(
+            "Spaghetti Bolognese", "Margherita Pizza", "Mac and Cheese", "Shrimp Pasta",
+            "Beef Tacos", "Stuffed Bell Peppers", "Chicken Fried Rice", "Vegetable Fried Rice",
+            "Beef Wraps"
+        )
+        val globalSides = listOf(
+            "Caesar Salad", "Chickpea Salad", "Vegetable Stir Fry", "Potato Wedges",
+            "Sweet Potato Mash", "Tomato Soup", "Pumpkin Soup", "Fruit Salad",
+            "Lentil Soup", "Chickpea Dip", "Grilled Cheese Sandwich"
+        )
+        addAllPairs(globalMains, globalSides)
+
+        val globalProteinCrossover = listOf(
+            "Chicken Curry", "Vegetable Curry", "Beef Stir Fry", "Roast Chicken", "Pork Chops with Herbs"
+        )
+        addAllPairs(globalProteinCrossover, globalSides)
+
+        addPair("Hot Dog", "Potato Wedges")
+        addPair("Hot Dog", "Coleslaw")
+        addPair("Chocolate Cake", "Banana Smoothie")
+        addPair("Chocolate Cake", "Mango Smoothie")
+        addPair("Fruit Salad", "Greek-Style Yogurt Bowl")
+
+        val pairings = mutableListOf<com.anthonykamau.foodchap.data.local.entity.RecipePairing>()
+        for ((nameA, nameB) in pairingNamePairs) {
+            val idA = recipeIdOf.getValue(nameA)
+            val idB = recipeIdOf.getValue(nameB)
+            pairings += com.anthonykamau.foodchap.data.local.entity.RecipePairing(recipeId = idA, pairedRecipeId = idB)
+            pairings += com.anthonykamau.foodchap.data.local.entity.RecipePairing(recipeId = idB, pairedRecipeId = idA)
+        }
         db.recipeDao().insertRecipePairings(pairings)
+
 
     }
 }

@@ -110,6 +110,8 @@ interface RecipeDao {
         SELECT r.* FROM recipes r
         INNER JOIN recipe_pairings rp ON rp.pairedRecipeId = r.id
         WHERE rp.recipeId = :recipeId
+        ORDER BY r.rating DESC
+        LIMIT 10
     """)
     suspend fun getPairingsForRecipe(recipeId: Long): List<Recipe>
 }
