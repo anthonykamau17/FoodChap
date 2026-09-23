@@ -18,6 +18,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 object BottomNavHelper {
 
     fun attach(activity: AppCompatActivity, bottomNav: BottomNavigationView, selectedId: Int) {
+        bottomNav.menu.clear()
         MenuInflater(activity).inflate(R.menu.bottom_nav_menu, bottomNav.menu)
         bottomNav.selectedItemId = selectedId
 

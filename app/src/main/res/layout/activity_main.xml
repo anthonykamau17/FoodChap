@@ -191,8 +191,7 @@
             android:layout_height="wrap_content"
             app:backgroundTint="@color/fc_background"
             app:itemIconTint="@color/fc_nav_button"
-            app:itemTextColor="@color/fc_nav_button"
-            app:menu="@menu/bottom_nav_menu" />
+            app:itemTextColor="@color/fc_nav_button"/>
 
     </LinearLayout>
 </FrameLayout>
