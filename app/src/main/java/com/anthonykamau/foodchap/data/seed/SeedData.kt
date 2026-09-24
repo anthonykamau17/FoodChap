@@ -1866,7 +1866,7 @@ object SeedData {
         val sides = listOf(
             "Kachumbari", "Kachumbari ya Parachichi", "Coleslaw", "Beetroot Salad",
             "Ndizi Kaanga", "Ndizi na Nazi", "Sukuma na Maharagwe", "Maharagwe ya Nazi",
-            "Terere", "Kunde", "Githeri", "Muthokoi", "Mahindi na Njugu", "Ndengu"
+            "Terere", "Kunde", "Githeri", "Muthokoi", "Ndengu"
         )
 
         // This is the "ugali pairs with most proteins" rule — every starch
