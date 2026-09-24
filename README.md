@@ -50,18 +50,6 @@
 *   Android SDK Level 34+
 *   Java 17
 
-### Installation
-1.  **Clone the repository:**
-    ```bash
-    git clone https://github.com/anthony-kamau/FoodChap.git
-    ```
-2.  **Open in Android Studio:**
-    Select `File > Open` and navigate to the project root.
-3.  **Sync Gradle:**
-    Allow Android Studio to download dependencies and sync the project structure.
-4.  **Run the App:**
-    Connect a device or emulator and click the **Run** button.
-
 ---
 
 ## Project Structure
