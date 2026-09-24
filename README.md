@@ -73,7 +73,7 @@
 
 ## 👨‍💻 Author
 **Anthony Kamau**
-*   GitHub: [@anthonykamau17](https://github.com/anthonykamau)
+*   GitHub: [@anthonykamau17](https://github.com/anthonykamau17)
 
 ---
 
