@@ -14,7 +14,7 @@ class OnboardingActivity : AppCompatActivity() {
     private data class Slide(val emoji: String, val title: String, val description: String)
 
     private val slides = listOf(
-        Slide("🍲", "Welcome to FoodChap", "Browse 100+ Kenyan and global recipes, with real ingredients and step-by-step instructions."),
+        Slide("🍲", "Welcome to FoodChap", "Browse 90+ Kenyan and global recipes, with real ingredients and step-by-step instructions."),
         Slide("🥕", "What Can I Cook?", "Select the ingredients you have — priced at real Kenyan market rates — and we'll show matching recipes with an estimate of how much you can make."),
         Slide("📅", "Meal Planner", "Plan your whole week. Tap \"+ Add to Meal Planner\" on any recipe, or assign one directly from the Planner tab."),
         Slide("🛒", "Shopping List", "Your plan turns into a shopping list automatically, grouped by category with a running KES total.")

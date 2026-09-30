@@ -68,9 +68,9 @@ class ShoppingListViewModel(app: Application) : AndroidViewModel(app) {
         val packages = packageDao.getPackagesForIngredientOnce(ingredientId).filter { it.unit == unit }
         if (packages.isEmpty()) return null
 
-        val cheapestPerUnit = packages.minByOrNull { it.priceKes / it.amount } ?: return null
-        val unitsNeeded = ceil(amount / cheapestPerUnit.amount).toInt().coerceAtLeast(1)
-        return unitsNeeded * cheapestPerUnit.priceKes
+        return packages.minOf { pkg ->
+            ceil(amount / pkg.amount).toInt().coerceAtLeast(1) * pkg.priceKes
+        }
     }
 
     private fun recalculateTotal() {

@@ -7,7 +7,7 @@
 ## ✨ Key Features
 
 ### 📖 Recipe Discovery
-*   **100+ Curated Recipes:** A diverse collection of both traditional Kenyan staples (Ugali, Pilau, Mukimo) and popular global dishes.
+*   **90+ Curated Recipes:** A diverse collection of both traditional Kenyan staples (Ugali, Pilau, Mukimo) and popular global dishes.
 *   **Smart Filtering:** Quickly browse by category—Breakfast, Main Meals, or Snacks—or use the real-time search bar to find exactly what you're looking for.
 *   **Interactive Instructions:** Detailed, step-by-step guides for every recipe, featuring built-in **cooking timers** to ensure perfect results every time.
 *   **Smart Pairings:** "Goes well with" suggestions help you build a complete meal (e.g., pairing Nyama Choma with Kachumbari).
