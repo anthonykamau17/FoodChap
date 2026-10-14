@@ -74,7 +74,7 @@
 ## 👨‍💻 Author
 **Anthony Kamau**
 *   GitHub: [@anthony-kamau](https://github.com/anthony-kamau)
-*   Watch the app walkthrough on youtube (https://youtu.be/Yzu__34wLhI)
+*   Watch the app walkthrough on Youtube (https://youtu.be/Yzu__34wLhI)
 
 ---
 
